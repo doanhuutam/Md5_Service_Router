@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Acount} from "../model/acount";
 import {FormControl, FormGroup} from "@angular/forms";
+import {ProductService} from "../services/product.service";
 
 @Component({
   selector: 'app-acount',
@@ -8,13 +9,14 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./acount.component.css']
 })
 export class AcountComponent implements OnInit {
-  @Input()
+  // @Input()
   listAcc: Acount[] = [];
   fromAcc: FormGroup = new FormGroup({});
 name:string="";
 passwork:string="";
 
-  constructor() {
+  constructor(private serviceacc:ProductService) {
+    this.listAcc=this.serviceacc.list
   }
 
   ngOnInit(): void {
@@ -24,23 +26,32 @@ passwork:string="";
     })
   }
 
-  @Output() deleteAcc = new EventEmitter();
-
-  delete(index: number) {
-    this.deleteAcc.emit(index)
-
+  // @Output() deleteAcc = new EventEmitter();
+  //
+  // delete(index: number) {
+  //   this.deleteAcc.emit(index)
+  //
+  // }
+  delete(index:number){
+    this.serviceacc.delete(index)
   }
 
-  @Output() createAcc = new EventEmitter();
-
-  create() {
-    this.createAcc.emit(this.fromAcc.value)
+  // @Output() createAcc = new EventEmitter();
+  //
+  // create() {
+  //   this.createAcc.emit(this.fromAcc.value)
+  // }
+  create(){
+    this.serviceacc.create(this.fromAcc.value)
   }
 
-  @Output() editAcc = new EventEmitter();
-
-  edit() {
-    this.editAcc.emit(this.fromAcc.value);
+  // @Output() editAcc = new EventEmitter();
+  //
+  // edit() {
+  //   this.editAcc.emit(this.fromAcc.value);
+  // }
+  edit(){
+    this.serviceacc.edit(this.fromAcc.value)
   }
   show(name?:string){
     for (let i=0;i<this.listAcc.length;i++){
