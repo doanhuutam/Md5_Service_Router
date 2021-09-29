@@ -1,0 +1,100 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Passwork</th>
+    <th>Create</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+<tr *ngFor="let a of listAcc ,index as i">
+  <td>{{a.name}}</td>
+  <td>{{a.passwork}}</td>
+  <td>
+  <p>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create</button>
+  </p>
+  </td>
+  <td>
+    <p>
+      <button (click)="show(a.name)" type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal1">
+        Edit
+      </button>
+    </p>
+  </td>
+  <td>
+    <button (click)="delete(i)" type="button" class="btn btn-warning">Delete</button>
+  </td>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <form [formGroup]="fromAcc">
+        <div class="modal-body">
+          <input [ngModel]="name" formControlName="name">
+          <input [ngModel]="passwork" formControlName="passwork">
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button (click)="create()" type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal">
+            Tạo mới
+          </button>
+        </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal" id="myModal1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <form [formGroup]="fromAcc">
+          <div class="modal-body">
+            <input  formControlName="name">
+            <input  formControlName="passwork">
+          </div>
+
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"data-dismiss="modal" >Close</button>
+            <button (click)="edit()" type="button" class="btn btn-dark" data-dismiss="modal">
+              Chinh sua
+            </button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+</tr>
+</table>
